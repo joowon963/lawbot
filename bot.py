@@ -56,19 +56,19 @@ async def 역할삽입(interaction: discord.Interaction, 대상유저: discord.M
 
         embed.add_field(
             name="명령어 사용자",
-            value=f"{interaction.user.mention} (`{interaction.user.id}`)",
+            value=interaction.user.mention,
             inline=False
         )
 
         embed.add_field(
             name="대상 유저",
-            value=f"{대상유저.mention} (`{대상유저.id}`)",
+            value=대상유저.mention,
             inline=False
         )
 
         embed.add_field(
             name="추가된 역할",
-            value=f"{역할.mention} (`{역할.id}`)",
+            value=역할.mention,
             inline=False
         )
 
@@ -78,3 +78,4 @@ async def 역할삽입(interaction: discord.Interaction, 대상유저: discord.M
 
 
 client.run(TOKEN)
+
