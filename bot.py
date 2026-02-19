@@ -1,27 +1,3 @@
-import discord
-from discord import app_commands
-from datetime import datetime
-import os
-TOKEN = os.getenv("TOKEN")
-
-
-LOG_CHANNEL_ID = 1474037746463932612
-
-intents = discord.Intents.default()
-intents.members = True
-
-class MyClient(discord.Client):
-    def __init__(self):
-        super().__init__(intents=intents)
-        self.tree = app_commands.CommandTree(self)
-
-    async def setup_hook(self):
-        await self.tree.sync()
-
-client = MyClient()
-
-BOG_ROLE_ID = 1472071539586240634
-
 @client.tree.command(name="역할삽입", description="유저에게 역할을 부여하고 로그를 남깁니다")
 @app_commands.describe(대상유저="역할을 받을 유저", 역할="추가할 역할")
 async def 역할삽입(interaction: discord.Interaction, 대상유저: discord.Member, 역할: discord.Role):
@@ -41,6 +17,15 @@ async def 역할삽입(interaction: discord.Interaction, 대상유저: discord.M
         ephemeral=True
     )
 
+    # ✅ 로그 보내기 추가
+    log_channel = client.get_channel(LOG_CHANNEL_ID)
 
+    if log_channel:
+        await log_channel.send(
+            f"📌 역할 지급 로그\n"
+            f"관리자: {interaction.user.mention}\n"
+            f"대상: {대상유저.mention}\n"
+            f"추가된 역할: {역할.mention}\n"
+            f"시간: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        )
 
-client.run(TOKEN)
