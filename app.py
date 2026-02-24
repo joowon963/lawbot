@@ -2,8 +2,10 @@ import discord
 from discord import app_commands
 from datetime import datetime
 import os
+from dotenv import load_dotenv
 
-TOKEN = "MTQ3NDAzNDY3MjQ5MjIyMDQ5OQ.Ga54iW.up5QHiYVkQ3zLD1S79QXLYA3BHx5-UljATVZJg"
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
 
 LOG_CHANNEL_ID = 1474037746463932612  # 🔹 로그 채널 ID
 BOG_ROLE_ID = 1472071539586240634     # 🔹 명령어 사용 가능한 역할 ID
@@ -78,6 +80,7 @@ async def 역할삽입(interaction: discord.Interaction, 대상유저: discord.M
 
 
 client.run(TOKEN)
+
 
 
 
